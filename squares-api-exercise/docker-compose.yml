@@ -1,0 +1,47 @@
+services:
+  squares-api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:8080"
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=db;Database=squaresdb;User=squares;Password=squarespwd;
+    networks:
+      - squares-network
+  db:
+    container_name: squaresdb
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: SecurePassword123Root
+      MYSQL_DATABASE: squaresdb
+      MYSQL_USER: squares
+      MYSQL_PASSWORD: squarespwd
+    volumes:
+      - ../database/mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - squares-network
+
+  phpmyadmin:
+    container_name: phpMyAdmin
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: SecurePassword123Root
+    ports:
+      - "8080:80"
+    networks:
+      - squares-network
+networks:
+   squares-network:
+    driver: bridge
