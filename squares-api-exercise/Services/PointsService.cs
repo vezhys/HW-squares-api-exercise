@@ -24,6 +24,8 @@ namespace squares_api_excercise.Services
 
         public async Task<PointDTO?> GetByIdAsync(int id)
         {
+            if (id < 0)
+                return null;
             var point = await _repository.GetByIdAsync(id);
 
             if (point == null)
@@ -57,6 +59,8 @@ namespace squares_api_excercise.Services
         }
         public async Task<(bool success, string message)> DeletePoint(int id)
         {
+            if (id < 0)
+                return (false, "invalid id");
             var entity = await _repository.GetByIdAsync(id);
             if (entity != null)
             {
