@@ -45,6 +45,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger(options => options.SerializeAsV2 = true);
     app.UseSwaggerUI();
 }
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<SquaresDbContext>();
+    dbContext.Database.Migrate();
+    await DataSeeder.SeedAsync(dbContext);
+}
 
 app.UseHttpsRedirection();
 
