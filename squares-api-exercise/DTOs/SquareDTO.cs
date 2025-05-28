@@ -2,6 +2,7 @@
 {
     public class SquareDTO
     {
+        public int? id { get; set; }
         public PointDTO P1 { get; set; }
         public PointDTO P2 { get; set; }
         public PointDTO P3 { get; set; }
