@@ -1,7 +1,7 @@
 using FluentAssertions;
 using Moq;
+using squares_api_excercise.Interfaces;
 using squares_api_excercise.Models;
-using squares_api_excercise.Repositories;
 using squares_api_excercise.Services;
 
 namespace SquaresApi.Tests
@@ -21,7 +21,6 @@ namespace SquaresApi.Tests
         [Fact]
         public async Task GetSquaresAsync_ReturnsExpectedDTOs()
         {
-            // Arrange: create some sample Squares with Points
             var squares = new List<Square>
             {
                 new Square
