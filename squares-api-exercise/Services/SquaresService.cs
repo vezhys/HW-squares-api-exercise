@@ -1,6 +1,7 @@
 ﻿using squares_api_excercise.DTOs;
-using squares_api_excercise.Interfaces;
 using squares_api_excercise.Models;
+using squares_api_excercise.Repositories.Interfaces;
+using squares_api_excercise.Services.Interfaces;
 
 namespace squares_api_excercise.Services
 {

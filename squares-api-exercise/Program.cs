@@ -5,9 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using OpenXmlPowerTools;
 using squares_api_excercise.Data;
-using squares_api_excercise.Interfaces;
 using squares_api_excercise.Repositories;
+using squares_api_excercise.Repositories.Interfaces;
 using squares_api_excercise.Services;
+using squares_api_excercise.Services.Interfaces;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);

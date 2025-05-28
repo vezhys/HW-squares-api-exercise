@@ -3,7 +3,7 @@ using squares_api_excercise.DTOs;
 using squares_api_excercise.Models;
 using System.Linq;
 
-namespace squares_api_excercise.Interfaces
+namespace squares_api_excercise.Services.Interfaces
 {
     public interface ISquaresService
     {

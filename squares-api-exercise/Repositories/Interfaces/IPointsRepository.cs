@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using squares_api_excercise.Models;
 
-namespace squares_api_excercise.Interfaces
+namespace squares_api_excercise.Repositories.Interfaces
 {
     public interface IPointsRepository
     {

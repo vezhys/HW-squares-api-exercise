@@ -2,7 +2,7 @@
 using squares_api_excercise.DTOs;
 using squares_api_excercise.Models;
 
-namespace squares_api_excercise.Interfaces
+namespace squares_api_excercise.Services.Interfaces
 {
     public interface IPointsService
     {

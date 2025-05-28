@@ -1,8 +1,9 @@
 using FluentAssertions;
 using Moq;
-using squares_api_excercise.Interfaces;
 using squares_api_excercise.Models;
+using squares_api_excercise.Repositories.Interfaces;
 using squares_api_excercise.Services;
+using squares_api_excercise.Services.Interfaces;
 
 namespace SquaresApi.Tests
 {
