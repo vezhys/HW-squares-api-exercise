@@ -1,4 +1,36 @@
-# Squares API
+# Squares API:  .NET Core + Service - Repository Pattern + Docker Compose
+## Prerequisites
+
+Make sure the following tools are installed on your machine:
+
+- [.NET SDK 7.0+](https://dotnet.microsoft.com/en-us/download)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop)
+
+## Running the project
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/vezhys/HW-squares-api-exercise.git
+cd squares-api-exercise
+```
+### 2. Build and Start the Application
+```bash
+docker-compose up --build
+```
+This will:
+- Build the Docker image for the API
+- Start the API and database containers
+- Expose the API at: http://localhost:5000
+
+Once running, open http://localhost:5000/swagger in your browser to view the Swagger UI and interact with the API documentation.
+
+### Database Migrations and Seeding
+
+On startup, the application automatically applies any pending Entity Framework Core migrations and seeds the database with initial data.  
+
+<details>
+  <summary>Click to expand/collapse task details</summary>
+  
 ## Problem Definition
 ### The bigger picture
 The Squares solution is designed to enable our enterprise consumers to identify squares from coordinates and thus make the world a better place.
@@ -47,3 +79,5 @@ Don't reinvent the wheel when it comes to identifying squares. There are plenty 
 Take *as long as you need* on the solution but we suggest to limit yourself at 8 hours. Do let us know how much time it took you!
 
 The task is not made to be completed in the period of 8 hours and no one expects you to! However, knowing how much time you spent and seeing the solution you came up with allows for seeing what you prioritize and where you would consider cutting corners on a sharp deadline.
+
+</details>
