@@ -1,6 +1,7 @@
-﻿using squares_api_excercise.DTOs;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using squares_api_excercise.DTOs;
+using squares_api_excercise.Interfaces;
 using squares_api_excercise.Models;
-using squares_api_excercise.Repositories;
 
 namespace squares_api_excercise.Services
 {
@@ -16,6 +17,7 @@ namespace squares_api_excercise.Services
             var entities = await _repository.GetAllAsync();
             var dtos = entities.Select(e => new PointDTO
             {
+                id = e.Id,
                 X = e.X,
                 Y = e.Y
             }).ToList();
@@ -33,10 +35,10 @@ namespace squares_api_excercise.Services
                 return null;
             }
 
-            return new PointDTO { X = point.X, Y = point.Y };
+            return new PointDTO {id = id, X = point.X, Y = point.Y };
         }
 
-        public async Task<(bool success, string message)> AddPoint(PointDTO point)
+        public async Task<Point?> AddPoint(PointDTO point)
         {
 
             if (point != null)
@@ -44,32 +46,29 @@ namespace squares_api_excercise.Services
                 var entity = new Point { X = point.X, Y = point.Y };
                 if (!await _repository.PointExists(entity))
                 {
-                    await _repository.AddPoint(entity);
-                    return (true, "Point added successfully");
+                   var created = await _repository.AddPoint(entity);
+
+                    return (created);
                 }
                 else
-                {
-                    return (false, "Such Point Already in database");
-                }
+                    return null;
             }
             else
-            {
-                return (false, "Point not provided");
-            }
+                return null;
         }
-        public async Task<(bool success, string message)> DeletePoint(int id)
+        public async Task<bool> DeletePoint(int id)
         {
             if (id < 0)
-                return (false, "invalid id");
+                return false;
             var entity = await _repository.GetByIdAsync(id);
             if (entity != null)
             {
-                    await _repository.DeletePoint(id);
-                    return (true, "Deleted point successfully");
+                await _repository.DeletePoint(id);
+                return true;
             }
             else
             {
-                return (false, "no such point found in database");
+                return false;
             }
         }
 
@@ -77,7 +76,7 @@ namespace squares_api_excercise.Services
         {
             if (request?.Points == null || request.Points.Count == 0)
             {
-                return -1;
+                return 0;
             }
             var points = request.Points.ToList();
             var pointsWithoutDuplicates = points.Distinct().ToList();

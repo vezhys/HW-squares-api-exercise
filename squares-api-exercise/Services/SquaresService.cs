@@ -1,6 +1,6 @@
 ﻿using squares_api_excercise.DTOs;
+using squares_api_excercise.Interfaces;
 using squares_api_excercise.Models;
-using squares_api_excercise.Repositories;
 
 namespace squares_api_excercise.Services
 {
@@ -20,6 +20,7 @@ namespace squares_api_excercise.Services
             var entities = await _repository.GetSquaresAsync();
             var dtos = entities.Select(e => new SquareDTO
             {
+                id = e.Id,
                 P1 = new PointDTO { X = e.P1.X, Y = e.P1.Y },
                 P2 = new PointDTO { X = e.P2.X, Y = e.P2.Y },
                 P3 = new PointDTO { X = e.P3.X, Y = e.P3.Y },
