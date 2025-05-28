@@ -1,11 +1,7 @@
-﻿
-using DocumentFormat.OpenXml.Wordprocessing;
-using Microsoft.AspNetCore.Mvc;
-using OpenXmlPowerTools;
+﻿using Microsoft.AspNetCore.Mvc;
 using squares_api_excercise.DTOs;
-using squares_api_excercise.Services;
+using squares_api_excercise.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Management.Automation.Host;
 
 namespace squares_api_excercise.Controllers
 {
@@ -110,19 +106,19 @@ namespace squares_api_excercise.Controllers
         /// {"x": 1, "y": 2}
         /// ```
         /// </remarks>
-        /// <response code="200">The point were successfully inserted to db.</response>
+        /// <response code="201">The point was successfully inserted to db.</response>
         /// <response code="400">The point was not inserted to db.</response>
         [HttpPost]
         [SwaggerOperation(Description = "Inserts a point into database with provided coordinates.")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IActionResult))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(IActionResult))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<PointDTO>> PostPoint(PointDTO point)
         {
             var result = await _pointsService.AddPoint(point);
-            if (result.success)
-                return Ok(result.message);
+            if (result != null)
+                return CreatedAtAction(nameof(GetPoint), new { id = result.Id }, result);
 
-            return BadRequest(result.message);
+            return BadRequest();
         }
 
         // DELETE: api/Points/5
@@ -139,9 +135,9 @@ namespace squares_api_excercise.Controllers
         public async Task<IActionResult> DeletePoint(int id)
         {
             var result = await _pointsService.DeletePoint(id);
-            if (result.success)
-                return Ok(result.message);
-            return BadRequest(result.message);
+            if (result)
+                return Ok();
+            return BadRequest();
         }
     }
 }
