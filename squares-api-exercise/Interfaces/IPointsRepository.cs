@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using squares_api_excercise.Models;
 
-namespace squares_api_excercise.Repositories
+namespace squares_api_excercise.Interfaces
 {
     public interface IPointsRepository
     {
@@ -9,11 +9,11 @@ namespace squares_api_excercise.Repositories
 
         Task<Point?> GetByIdAsync(int id);
 
-        Task AddPoint(Point point);
+        Task<Point> AddPoint(Point point);
 
         Task DeletePoint(int id);
 
-        Task AddMany(IEnumerable<Point> list);
+        Task<IEnumerable<Point?>> AddMany(IEnumerable<Point> list);
 
         Task <bool> PointExists(Point point);
        }
